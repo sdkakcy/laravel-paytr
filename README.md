@@ -3,6 +3,28 @@
 
 This package has been developed only for the Paytr Iframe API service.
 
+## Requirements
+
+This package supports the following Laravel versions:
+
+| Laravel Version | PHP Version | Package Version |
+|----------------|-------------|-----------------|
+| 8.x | 8.0, 8.1 | 2.x |
+| 8.x | 8.2+ | 3.x |
+| 9.x | 8.0, 8.1 | 2.x |
+| 9.x | 8.2+ | 3.x |
+| 10.x | 8.1 | 2.x |
+| 10.x | 8.2+ | 3.x |
+| 11.x | 8.2+ | 3.x |
+| 12.x | 8.2+ | 3.x |
+
+**Minimum Requirements:**
+- PHP 8.0+ (PHP 8.2+ required for Laravel 11 and 12)
+- Laravel 8.x, 9.x, 10.x, 11.x, or 12.x
+- Guzzle HTTP Client 7.x
+
+## Installation
+
 **How to install?**
 
     composer require gizemsever/laravel-paytr
@@ -42,7 +64,7 @@ Setup your environment
 	    use Gizemsever\LaravelPaytr\Payment\Currency;
 	    
 		$payment = \Paytr::payment()  
-		    ->setCurrency(Currency::TRY)  
+		    ->setCurrency(Currency::TRY->value)  
 		    ->setUserPhone($phone)  
 		    ->setUserAddress($address)  
 		    ->setNoInstallment(1)  

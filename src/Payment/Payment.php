@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Gizem Sever <gizemsever68@gmail.com>
  */
@@ -10,405 +11,258 @@ use Gizemsever\LaravelPaytr\PaytrResponse;
 
 class Payment extends PaytrClient
 {
-    /**
-     * @var string
-     */
-    private $userIp;
+    private string $userIp;
 
-    /**
-     * @var string
-     */
-    private $merchantOid;
+    private string $merchantOid;
 
-    /**
-     * @var string
-     */
-    private $email;
+    private string $email;
 
-    /**
-     * @var float
-     */
-    private $paymentAmount;
+    private float $paymentAmount;
 
-    /**
-     * @var int
-     */
-    private $noInstallment;
+    private int $noInstallment;
 
-    /**
-     * @var int
-     */
-    private $maxInstallment;
+    private int $maxInstallment;
 
-    /**
-     * @var string
-     */
-    private $userName;
+    private string $userName;
 
-    /**
-     * @var string
-     */
-    private $userAddress;
+    private string $userAddress;
 
-    /**
-     * @var string
-     */
-    private $userPhone;
+    private string $userPhone;
 
-    /**
-     * @var string
-     */
-    private $successUrl;
+    private string $successUrl;
 
-    /**
-     * @var string
-     */
-    private $failUrl;
+    private string $failUrl;
 
-    /**
-     * @var bool
-     */
-    private $debugOn = false;
+    private bool $debugOn = false;
 
-    /**
-     * @var Basket
-     */
-    private $basket;
+    private Basket $basket;
 
-    /**
-     * @var string
-     */
-    private $currency = Currency::TRY;
+    private string $currency = Currency::TRY->value;
 
-    /**
-     * @var int
-     */
-    private $timeoutLimit = 0;
+    private int $timeoutLimit = 0;
 
-    /**
-     * @var string
-     */
-    private $lang = 'tr';
+    private string $lang = 'tr';
 
-    /**
-     * @return string
-     */
     public function getCurrency(): string
     {
         return $this->currency;
     }
 
-    /**
-     * @param string $currency
-     */
-    public function setCurrency(string $currency)
+    public function setCurrency(string $currency): static
     {
         $this->currency = $currency;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getUserIp(): string
     {
         return $this->userIp;
     }
 
-    /**
-     * @param string $userIp
-     */
-    public function setUserIp(string $userIp)
+    public function setUserIp(string $userIp): static
     {
         $this->userIp = $userIp;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getMerchantOid(): string
     {
         return $this->merchantOid;
     }
 
-    /**
-     * @param string $merchantOid
-     */
-    public function setMerchantOid(string $merchantOid)
+    public function setMerchantOid(string $merchantOid): static
     {
         $this->merchantOid = $merchantOid;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getEmail(): string
     {
         return $this->email;
     }
 
-    /**
-     * @param string $email
-     */
-    public function setEmail(string $email)
+    public function setEmail(string $email): static
     {
         $this->email = $email;
 
         return $this;
     }
 
-    /**
-     * @return float
-     */
     public function getPaymentAmount(): float
     {
         return $this->paymentAmount;
     }
 
-    /**
-     * @param float $paymentAmount
-     */
-    public function setPaymentAmount(float $paymentAmount)
+    public function setPaymentAmount(float $paymentAmount): static
     {
         $this->paymentAmount = $paymentAmount;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getNoInstallment(): int
     {
         return $this->noInstallment;
     }
 
-    /**
-     * @param int $noInstallment
-     */
-    public function setNoInstallment(int $noInstallment)
+    public function setNoInstallment(int $noInstallment): static
     {
         $this->noInstallment = $noInstallment;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getMaxInstallment(): int
     {
         return $this->maxInstallment;
     }
 
-    /**
-     * @param int $maxInstallment
-     */
-    public function setMaxInstallment(int $maxInstallment)
+    public function setMaxInstallment(int $maxInstallment): static
     {
         $this->maxInstallment = $maxInstallment;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getUserName(): string
     {
         return $this->userName;
     }
 
-    /**
-     * @param string $userName
-     */
-    public function setUserName(string $userName)
+    public function setUserName(string $userName): static
     {
         $this->userName = $userName;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getUserAddress(): string
     {
         return $this->userAddress;
     }
 
-    /**
-     * @param string $userAddress
-     */
-    public function setUserAddress(string $userAddress)
+    public function setUserAddress(string $userAddress): static
     {
         $this->userAddress = $userAddress;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getUserPhone(): string
     {
         return $this->userPhone;
     }
 
-    /**
-     * @param string $userPhone
-     */
-    public function setUserPhone(string $userPhone)
+    public function setUserPhone(string $userPhone): static
     {
         $this->userPhone = $userPhone;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getSuccessUrl(): string
     {
         return $this->successUrl;
     }
 
-    /**
-     * @param string $successUrl
-     */
-    public function setSuccessUrl(string $successUrl)
+    public function setSuccessUrl(string $successUrl): static
     {
         $this->successUrl = $successUrl;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getFailUrl(): string
     {
         return $this->failUrl;
     }
 
-    /**
-     * @param string $failUrl
-     */
-    public function setFailUrl(string $failUrl)
+    public function setFailUrl(string $failUrl): static
     {
         $this->failUrl = $failUrl;
 
         return $this;
     }
 
-    /**
-     * @return bool
-     */
     public function isDebugOn(): bool
     {
         return $this->debugOn;
     }
 
-    /**
-     * @param bool $debugOn
-     */
-    public function setDebugOn(bool $debugOn)
+    public function setDebugOn(bool $debugOn): static
     {
         $this->debugOn = $debugOn;
 
         return $this;
     }
 
-    /**
-     * @return Basket
-     */
     public function getBasket(): Basket
     {
         return $this->basket;
     }
 
-    /**
-     * @param Basket $basket
-     * @return Payment
-     */
-    public function setBasket(Basket $basket)
+    public function setBasket(Basket $basket): static
     {
         $this->basket = $basket;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
     public function getTimeoutLimit(): int
     {
         return $this->timeoutLimit;
     }
 
-    /**
-     * @param int $timeoutLimit
-     * @return self
-     */
-    public function setTimeoutLimit(int $timeoutLimit): self
+    public function setTimeoutLimit(int $timeoutLimit): static
     {
         $this->timeoutLimit = $timeoutLimit;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getLang(): string
     {
         return $this->lang;
     }
 
-    /**
-     * @param string $lang
-     * @return self
-     */
-    public function setLang(string $lang): self
+    public function setLang(string $lang): static
     {
         $this->lang = $lang;
 
         return $this;
     }
 
-    private function getHash()
+    private function getHash(): string
     {
-        return '' .
-            $this->credentials['merchant_id'] .
-            $this->getUserIp() .
-            $this->getMerchantOid() .
-            $this->getEmail() .
-            $this->formattedPaymentAmount() .
-            $this->basket->formatted() .
-            $this->getNoInstallment() .
-            $this->getMaxInstallment() .
-            $this->getCurrency() .
+        return ''.
+            $this->credentials['merchant_id'].
+            $this->getUserIp().
+            $this->getMerchantOid().
+            $this->getEmail().
+            $this->formattedPaymentAmount().
+            $this->basket->formatted().
+            $this->getNoInstallment().
+            $this->getMaxInstallment().
+            $this->getCurrency().
             $this->options['test_mode'];
     }
 
-    private function createPaymentToken()
+    private function createPaymentToken(): string
     {
         $hash = $this->getHash();
-        
-        return base64_encode(hash_hmac('sha256', $hash . $this->credentials['merchant_salt'], $this->credentials['merchant_key'], true));
+
+        return base64_encode(hash_hmac('sha256', $hash.$this->credentials['merchant_salt'], $this->credentials['merchant_key'], true));
     }
 
-    private function formattedPaymentAmount()
+    private function formattedPaymentAmount(): float
     {
         return $this->getPaymentAmount() * 100;
     }
 
-    private function getBody()
+    private function getBody(): array
     {
         $paymentToken = $this->createPaymentToken();
 
@@ -435,11 +289,11 @@ class Payment extends PaytrClient
         ];
     }
 
-    public function create()
+    public function create(): PaytrResponse
     {
         $requestBody = $this->getBody();
         $response = $this->callApi('POST', 'odeme/api/get-token', $requestBody);
 
-        return new PaytrResponse(json_decode((string)$response->getBody(), true));
+        return new PaytrResponse(json_decode((string) $response->getBody(), true));
     }
 }

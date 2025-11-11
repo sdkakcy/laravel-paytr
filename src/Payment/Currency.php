@@ -1,15 +1,16 @@
 <?php
+
 /**
  * @author Gizem Sever <gizemsever68@gmail.com>
  */
 
 namespace Gizemsever\LaravelPaytr\Payment;
 
-class Currency
+enum Currency: string
 {
-    const TRY = 'TRY';
-    const EUR = 'EUR';
-    const USD = 'USD';
-    const GBP = 'GBP';
-    const RUB = 'RUB';
+    case TRY = 'TRY';
+    case EUR = 'EUR';
+    case USD = 'USD';
+    case GBP = 'GBP';
+    case RUB = 'RUB';
 }

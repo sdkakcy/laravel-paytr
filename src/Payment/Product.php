@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Gizem Sever <gizemsever68@gmail.com>
  */
@@ -7,45 +8,31 @@ namespace Gizemsever\LaravelPaytr\Payment;
 
 class Product
 {
-    /**
-     * @var string
-     */
-    private $name;
+    private string $name;
 
-    /**
-     * @return string
-     */
+    private float $price;
+
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     */
-    public function setName(string $name)
+    public function setName(string $name): static
     {
         $this->name = $name;
+
+        return $this;
     }
 
-    /**
-     * @return float
-     */
     public function getPrice(): float
     {
         return $this->price;
     }
 
-    /**
-     * @param float $price
-     */
-    public function setPrice(float $price)
+    public function setPrice(float $price): static
     {
         $this->price = $price;
-    }
 
-    /**
-     * @var float
-     */
-    private $price;
+        return $this;
+    }
 }

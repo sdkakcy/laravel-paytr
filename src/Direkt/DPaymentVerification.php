@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Gizem Sever <gizemsever68@gmail.com>
  */
@@ -6,29 +7,42 @@
 namespace Gizemsever\LaravelPaytr\Direkt;
 
 use Gizemsever\LaravelPaytr\PaytrClient;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class DPaymentVerification extends PaytrClient
 {
-    private $request;
+    private Request $request;
+
     private string $merchantOid;
+
     private string $status;
+
     private float $totalAmount;
+
     private string $hash;
+
     private ?int $failedReasonCode;
+
     private ?string $failedReasonMessage;
+
     private ?int $testMode;
+
     private ?string $paymentType;
+
     private ?string $currency;
+
     private ?int $paymentAmount;
+
     private ?string $uToken;
 
-    public function __construct($request)
+    public function __construct(Request $request)
     {
         $this->request = $request;
         $this->setup();
     }
 
-    private function setup()
+    private function setup(): void
     {
         $this->merchantOid = $this->request->input('merchant_oid');
         $this->status = $this->request->input('status');
@@ -43,97 +57,61 @@ class DPaymentVerification extends PaytrClient
         $this->uToken = $this->request->input('utoken', null);
     }
 
-    /**
-     * @return Request
-     */
-    public function getRequest()
+    public function getRequest(): Request
     {
         return $this->request;
     }
 
-    /**
-     * @return string
-     */
     public function getMerchantOid(): string
     {
         return $this->merchantOid;
     }
 
-    /**
-     * @return string
-     */
     public function getStatus(): string
     {
         return $this->status;
     }
 
-    /**
-     * @return float
-     */
     public function getTotalAmount(): float
     {
         return $this->totalAmount;
     }
 
-    /**
-     * @return string
-     */
     public function getHash(): string
     {
         return $this->hash;
     }
 
-    /**
-     * @return int|null
-     */
     public function getFailedReasonCode(): ?int
     {
         return $this->failedReasonCode;
     }
 
-    /**
-     * @return string|null
-     */
     public function getFailedReasonMessage(): ?string
     {
         return $this->failedReasonMessage;
     }
 
-    /**
-     * @return int|null
-     */
     public function getTestMode(): ?int
     {
         return $this->testMode;
     }
 
-    /**
-     * @return string|null
-     */
     public function getPaymentType(): ?string
     {
         return $this->paymentType;
     }
 
-    /**
-     * @return string|null
-     */
     public function getCurrency(): ?string
     {
         return $this->currency;
     }
 
-    /**
-     * @return int
-     */
     public function getPaymentAmount(): int
     {
         return $this->paymentAmount;
     }
 
-    /**
-     * @return string|null
-     */
     public function getUToken(): ?string
     {
         return $this->uToken;
@@ -141,9 +119,9 @@ class DPaymentVerification extends PaytrClient
 
     private function generateHash(): string
     {
-        return $this->getMerchantOid() .
-            $this->credentials['merchant_salt'] .
-            $this->getStatus() .
+        return $this->getMerchantOid().
+            $this->credentials['merchant_salt'].
+            $this->getStatus().
             $this->getTotalAmount();
     }
 
@@ -151,17 +129,17 @@ class DPaymentVerification extends PaytrClient
     {
         $hash = $this->generateHash();
         $token = $this->generateToken($hash);
-        return ($token === $this->getHash());
+
+        return $token === $this->getHash();
     }
 
     public function isSuccess(): bool
     {
-        return ($this->status === 'success');
+        return $this->status === 'success';
     }
 
-    public function getProcessedResponse()
+    public function getProcessedResponse(): Response
     {
-        return response('OK', 200);
+        return response('OK', Response::HTTP_OK);
     }
-
 }

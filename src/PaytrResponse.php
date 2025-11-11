@@ -6,40 +6,35 @@
 
 namespace Gizemsever\LaravelPaytr;
 
-use Psr\Http\Message\MessageInterface;
-use Psr\Http\Message\ResponseInterface;
-
 class PaytrResponse
 {
-    private $response;
-    private $content;
-
-    public function __construct($response)
+    public function __construct(private readonly ?array $response)
     {
-        $this->response = $response;
-        $this->content = $response;
+        //
     }
 
-    /**
-     * @return mixed
-     */
-    public function getContent()
+    public function getResponse(): ?array
     {
-        return $this->content;
+        return $this->response;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->response['status'] ?? null;
     }
 
     public function isSuccess(): bool
     {
-        return ($this->content['status'] === 'success');
+        return $this->getStatus() === 'success';
     }
 
-    public function getMessage()
+    public function getMessage(): ?string
     {
-        return isset($this->content['reason']) ? $this->content['reason'] : null;
+        return $this->response['reason'] ?? null;
     }
 
-    public function getToken()
+    public function getToken(): ?string
     {
-        return isset($this->content['token']) ? $this->content['token'] : null;
+        return $this->response['token'] ?? null;
     }
 }

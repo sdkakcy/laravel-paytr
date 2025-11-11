@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Gizem Sever <gizemsever68@gmail.com>
  */
@@ -15,5 +16,5 @@ return [
         'success_url' => env('PAYTR_SUCCESS_URL'),
         'fail_url' => env('PAYTR_FAIL_URL'),
         'test_mode' => env('PAYTR_TEST_MODE', true),
-    ]
+    ],
 ];

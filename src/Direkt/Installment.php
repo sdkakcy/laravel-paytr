@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Gizem Sever <gizemsever68@gmail.com>
  */
@@ -12,29 +13,23 @@ class Installment extends PaytrClient
 {
     private ?string $requestId;
 
-    /**
-     * @return string|null
-     */
     public function getRequestId(): ?string
     {
         return $this->requestId;
     }
 
-    /**
-     * @param string|null $requestId
-     * @return Installment
-     */
     public function setRequestId(?string $requestId): static
     {
         $this->requestId = $requestId;
+
         return $this;
     }
 
     private function getHash(): string
     {
-        return '' .
-            $this->credentials['merchant_id'] .
-            $this->getRequestId() .
+        return ''.
+            $this->credentials['merchant_id'].
+            $this->getRequestId().
             $this->credentials['merchant_salt'];
     }
 
@@ -49,7 +44,7 @@ class Installment extends PaytrClient
         ];
 
         $response = $this->callApi('POST', 'odeme/taksit-oranlari', $body);
-        return new PaytrResponse(json_decode((string)$response->getBody(), true));
 
+        return new PaytrResponse(json_decode((string) $response->getBody(), true));
     }
 }

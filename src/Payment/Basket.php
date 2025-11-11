@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Gizem Sever <gizemsever68@gmail.com>
  */
@@ -7,36 +8,29 @@ namespace Gizemsever\LaravelPaytr\Payment;
 
 class Basket
 {
-    /**
-     * @var array
-     */
-    private $products = [];
+    private array $products = [];
 
-    public function addProduct(Product $product, int $quantity)
+    public function addProduct(Product $product, int $quantity): static
     {
         $this->products[] = [
             $product->getName(),
             $product->getPrice(),
-            $quantity
+            $quantity,
         ];
+
         return $this;
     }
 
     /**
-     * @param array $basketProducts
-     * @var $basketProducts [0] string
-     * @var $basketProducts [1] float
-     * @var $basketProducts [2] int
+     * @var array<int, array{0: string, 1: float, 2: int}>
      */
-    public function addProducts(array $basketProducts)
+    public function addProducts(array $basketProducts): static
     {
         $this->products = array_merge($this->products, $basketProducts);
+
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function getProducts(): array
     {
         return $this->products;

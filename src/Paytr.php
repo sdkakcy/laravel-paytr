@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Gizem Sever <gizemsever68@gmail.com>
  */
@@ -18,18 +19,15 @@ use Illuminate\Http\Request;
 
 class Paytr
 {
-    private $client;
-    private $credentials;
-    private $options;
-
-    public function __construct(Client $client, array $credentials = [], array $options = [])
-    {
-        $this->client = $client;
-        $this->credentials = $credentials;
-        $this->options = $options;
+    public function __construct(
+        private readonly Client $client,
+        private readonly array $credentials = [],
+        private readonly array $options = []
+    ) {
+        //
     }
 
-    public function createPayment(Payment $payment)
+    public function createPayment(Payment $payment): PaytrResponse
     {
         return $payment->setClient($this->client)
             ->setCredentials($this->credentials)
@@ -37,67 +35,61 @@ class Paytr
             ->create();
     }
 
-    public function payment()
+    public function payment(): Payment
     {
-        return new Payment();
+        return new Payment;
     }
 
     public function direktPayment(): DPayment
     {
-        $payment = new DPayment();
-        $payment->setClient($this->client)
+        return (new DPayment)
+            ->setClient($this->client)
             ->setCredentials($this->credentials)
             ->setOptions($this->options);
-        return $payment;
     }
 
-    public function bin()
+    public function bin(): BankIdentification
     {
-        $bin = new BankIdentification();
-        $bin->setClient($this->client)
+        return (new BankIdentification)
+            ->setClient($this->client)
             ->setCredentials($this->credentials)
             ->setOptions($this->options);
-        return $bin;
     }
 
-    public function installments()
+    public function installments(): Installment
     {
-        $installment = new Installment();
-        $installment->setClient($this->client)
+        return (new Installment)
+            ->setClient($this->client)
             ->setCredentials($this->credentials)
             ->setOptions($this->options);
-        return $installment;
     }
 
-    public function basket()
+    public function basket(): Basket
     {
-        return new Basket();
+        return new Basket;
     }
 
-    public function direktPaymentVerification(Request $request)
+    public function direktPaymentVerification(Request $request): DPaymentVerification
     {
-        $verification = new DPaymentVerification($request);
-        $verification->setClient($this->client)
+        return (new DPaymentVerification($request))
+            ->setClient($this->client)
             ->setCredentials($this->credentials)
             ->setOptions($this->options);
-        return $verification;
     }
 
-    public function capi()
+    public function capi(): Capi
     {
-        $capi = new Capi();
-        $capi->setClient($this->client)
+        return (new Capi)
+            ->setClient($this->client)
             ->setCredentials($this->credentials)
             ->setOptions($this->options);
-        return $capi;
     }
 
-    public function paymentVerification(Request $request)
+    public function paymentVerification(Request $request): PaymentVerification
     {
-        $verification = new PaymentVerification($request);
-        $verification->setClient($this->client)
+        return (new PaymentVerification($request))
+            ->setClient($this->client)
             ->setCredentials($this->credentials)
             ->setOptions($this->options);
-        return $verification;
     }
 }

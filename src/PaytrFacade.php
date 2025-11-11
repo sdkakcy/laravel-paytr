@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Gizem Sever <gizemsever68@gmail.com>
  */
@@ -9,7 +10,7 @@ use Illuminate\Support\Facades\Facade;
 
 class PaytrFacade extends Facade
 {
-    protected static function getFacadeAccessor()
+    protected static function getFacadeAccessor(): string
     {
         return Paytr::class;
     }
