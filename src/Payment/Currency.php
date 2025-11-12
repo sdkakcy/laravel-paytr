@@ -8,13 +8,13 @@ namespace Gizemsever\LaravelPaytr\Payment;
 
 class Currency
 {
-    const TRY = 'TRY';
+    public const TRY = 'TRY';
 
-    const EUR = 'EUR';
+    public const EUR = 'EUR';
 
-    const USD = 'USD';
+    public const USD = 'USD';
 
-    const GBP = 'GBP';
+    public const GBP = 'GBP';
 
-    const RUB = 'RUB';
+    public const RUB = 'RUB';
 }
