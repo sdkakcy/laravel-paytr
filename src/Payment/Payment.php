@@ -37,7 +37,7 @@ class Payment extends PaytrClient
 
     private Basket $basket;
 
-    private string $currency = Currency::TRY->value;
+    private string $currency = Currency::TRY;
 
     private int $timeoutLimit = 0;
 

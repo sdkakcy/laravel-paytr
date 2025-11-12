@@ -64,7 +64,7 @@ Setup your environment
 	    use Gizemsever\LaravelPaytr\Payment\Currency;
 	    
 		$payment = \Paytr::payment()  
-		    ->setCurrency(Currency::TRY->value)  
+		    ->setCurrency(Currency::TRY)  
 		    ->setUserPhone($phone)  
 		    ->setUserAddress($address)  
 		    ->setNoInstallment(1)  
