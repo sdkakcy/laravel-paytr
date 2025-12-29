@@ -8,19 +8,19 @@ namespace Gizemsever\LaravelPaytr;
 
 class PaytrResponse
 {
-    public function __construct(private readonly ?array $response)
+    public function __construct(private readonly ?array $content)
     {
         //
     }
 
-    public function getResponse(): ?array
+    public function getContent(): ?array
     {
-        return $this->response;
+        return $this->content;
     }
 
     public function getStatus(): ?string
     {
-        return $this->response['status'] ?? null;
+        return $this->content['status'] ?? null;
     }
 
     public function isSuccess(): bool
@@ -30,11 +30,11 @@ class PaytrResponse
 
     public function getMessage(): ?string
     {
-        return $this->response['reason'] ?? null;
+        return $this->content['reason'] ?? null;
     }
 
     public function getToken(): ?string
     {
-        return $this->response['token'] ?? null;
+        return $this->content['token'] ?? null;
     }
 }
